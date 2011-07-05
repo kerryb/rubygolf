@@ -36,8 +36,13 @@ class Golf
     end
 
     def hole9 a
-      votes = File.read(a).lines.map{|b|b.chomp.split ", "}
-      votes.group_by(&:first).sort_by{|c,d|d.size}[-1][0]
+      votes = File.read(a).map{|b|b.chomp.split ", "}
+      counts = Hash.new{0}
+      begin
+        votes.map(&:shift).compact.group_by{|xx|xx}.each{|k,v|counts[k]+=v.size}
+        p counts
+      end until counts.values.any?{|yy|yy.to_i>=votes.size/2}
+      counts.sort_by{|k,v|v}[-1][0]
     end
   end
 end
