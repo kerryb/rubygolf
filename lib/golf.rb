@@ -40,9 +40,9 @@ class Golf
       b = File.read(a).map{|b| b.chomp.split ", " }
       c = Hash.new {0}
       begin
-        b.map(&:shift).compact.group_by{|xx| xx}.each{|k,v| c[k] += v.size }
+        b.map(&:shift).compact.group_by{|d| d}.each{|k,v| c[k] += v.size }
         p c
-      end until c.values.any?{|yy| yy.to_i >= b.size/2 }
+      end until c.values.any?{|e| e.to_i >= b.size/2 }
       c.sort_by{|k,v| v }[-1][0]
     end
   end
