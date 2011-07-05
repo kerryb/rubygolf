@@ -25,14 +25,19 @@ class Golf
         c.empty?? b:c}
     end
 
-    def hole8 a
-      (3..a).inject([1,1]){|b,c|b<<b[-2]+b[-1]}
-    end
-
     def hole7 a
       b=[[a.shift]]
       a.each{|c|b[-1].include?(c-1)?b[-1]<<c:b<<[c]}
       b.map{|d|d.size==1?d[0].to_s: "#{d[0]}-#{d[-1]}"}
+    end
+
+    def hole8 a
+      (3..a).inject([1,1]){|b,c|b<<b[-2]+b[-1]}
+    end
+
+    def hole9 a
+      votes = File.read(a).lines.map{|b|b.chomp.split ", "}
+      votes.group_by(&:first).sort_by{|c,d|d.size}[-1][0]
     end
   end
 end
