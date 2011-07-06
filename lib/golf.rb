@@ -39,9 +39,9 @@ class Golf
     def hole9 a
       b = File.read(a).map{|b| b.chomp.split ", " }
       c = Hash.new {0}
-      begin
+      until c.values.any?{|e| e.to_i >= b.size/2 }
         b.map(&:shift).compact.group_by{|d| d}.each{|k,v| c[k] += v.size }
-      end until c.values.any?{|e| e.to_i >= b.size/2 }
+      end
       c.sort_by{|k,v| v }[-1][0]
     end
   end
