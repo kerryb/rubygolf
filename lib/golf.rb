@@ -29,7 +29,7 @@ class Golf
     def hole7 a
       b = [[a.shift]]
       a.each {|c| b[-1].include?(c-1) ? b[-1] << c :b <<[c] }
-      b.map {|d| d.size == 1 ? d[0].to_s : "#{d[0]}-#{d[-1]}" }
+      b.map {|d| d[1] ? "#{d[0]}-#{d[-1]}" : d[0].to_s }
     end
 
     def hole8 a
@@ -41,7 +41,6 @@ class Golf
       c = Hash.new {0}
       begin
         b.map(&:shift).compact.group_by{|d| d}.each{|k,v| c[k] += v.size }
-        p c
       end until c.values.any?{|e| e.to_i >= b.size/2 }
       c.sort_by{|k,v| v }[-1][0]
     end
