@@ -5,7 +5,7 @@ class Golf
     end
 
     def hole2 a
-      a.split.sort {|b,c| b[1]<=>c[1] }.join" "
+      a.split.sort_by {|b| b[1] }.join" "
     end
 
     def hole3 a
